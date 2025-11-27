@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Question, UserResponse, QuestionStatus, QuestionType, Subject } from '../types';
 import { Clock, Menu, X, Bookmark, ArrowRight, ArrowLeft, Grid } from 'lucide-react';
@@ -226,7 +225,7 @@ export const TestInterface: React.FC<TestInterfaceProps> = ({ questions, duratio
     }
   };
 
-  const activeSubjects = Array.from(new Set(questions.map(q => q.subject)));
+  const activeSubjects: Subject[] = Array.from(new Set(questions.map(q => q.subject)));
   
   return (
     <div className="flex flex-col h-screen bg-slate-950 text-slate-200 relative overflow-hidden">
