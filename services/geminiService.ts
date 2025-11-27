@@ -1,10 +1,8 @@
-
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { Question, Subject, QuestionType, TestConfig } from "../types";
 import { SYLLABUS } from "../constants";
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // Helper to distribute total count among active subjects
 const distributeCount = (total: number, parts: number): number[] => {
@@ -117,7 +115,7 @@ const generateBatch = async (
 
     return [...mcqs, ...nums];
   } catch (error) {
-    console.error(`Error generating batch for ${subject}:`, error);
+    console.error(`Error generating batch for ${subject}. Check your API Key. Details:`, error);
     return []; 
   }
 };
@@ -191,6 +189,6 @@ export const generateQuestions = async (config: TestConfig): Promise<Question[]>
 
   } catch (error) {
     console.error("Gemini Generation Error:", error);
-    throw new Error("Failed to generate test. Please check your connection and try again.");
+    throw new Error("Failed to generate test. Please check your connection and API Key.");
   }
 };
